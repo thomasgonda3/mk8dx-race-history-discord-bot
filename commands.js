@@ -101,6 +101,97 @@ VALUES
 	  ,@Result)
       SELECT SCOPE_IDENTITY();`;
 
+const tracksLowercaseMap = {
+  mks: "MKS",
+  wp: "WP",
+  ssc: "SSC",
+  tr: "TR",
+  mc: "MC",
+  th: "TH",
+  tm: "TM",
+  sgf: "SGF",
+  sa: "SA",
+  ds: "DS",
+  ed: "Ed",
+  mw: "MW",
+  cc: "CC",
+  bdd: "BDD",
+  bc: "BC",
+  rr: "RR",
+  rmmm: "rMMM",
+  rmc: "rMC",
+  rccb: "rCCB",
+  rtt: "rTT",
+  rddd: "rDDD",
+  rdp3: "rDP3",
+  rrry: "rRRy",
+  rdkj: "rDKJ",
+  rws: "rWS",
+  rsl: "rSL",
+  rmp: "rMP",
+  ryv: "rYV",
+  rttc: "rTTC",
+  rpps: "rPPS",
+  rgv: "rGV",
+  rrrd: "rRRd",
+  dyc: "dYC",
+  dea: "dEA",
+  ddd: "dDD",
+  dmc: "dMC",
+  dwgm: "dWGM",
+  drr: "dRR",
+  diio: "dIIO",
+  dhc: "dHC",
+  dbp: "dBP",
+  dcl: "dCL",
+  dww: "dWW",
+  dac: "dAC",
+  dnbc: "dNBC",
+  drir: "dRiR",
+  dsbs: "dSBS",
+  dbb: "dBB",
+  bpp: "bPP",
+  btc: "bTC",
+  bcmo: "bCMo",
+  bcma: "bCMa",
+  btb: "bTB",
+  bsr: "bSR",
+  bsg: "bSG",
+  bnh: "bNH",
+  bnym: "bNYM",
+  bmc3: "bMC3",
+  bkd: "bKD",
+  bwp: "bWP",
+  bss: "bSS",
+  bsl: "bSL",
+  bmg: "bMG",
+  bshs: "bSHS",
+  bll: "bLL",
+  bbl: "bBL",
+  brrm: "bRRM",
+  bmt: "bMT",
+  bbb: "bBB",
+  bpg: "bPG",
+  bmm: "bMM",
+  brr7: "bRR7",
+  bad: "bAD",
+  brp: "bRP",
+  bdks: "bDKS",
+  byi: "bYI",
+  bbr: "bBR",
+  bmc: "bMC",
+  bws: "bWS",
+  bssy: "bSSy",
+  batd: "bAtD",
+  bdc: "bDC",
+  bmh: "bMH",
+  bscs: "bSCS",
+  blal: "bLAL",
+  bsw: "bSW",
+  bkc: "bKC",
+  bvv: "bVV",
+};
+
 const tracksMap = {
   MKS: "Mario Kart Stadium",
   WP: "Water Park",
@@ -256,10 +347,10 @@ const newRace = {
   },
   async execute(interaction) {
     try {
-      const Track = interaction.options.getString("track");
-      if (tracks.indexOf(Track) == -1) {
+      let Track = interaction.options.getString("track").toLowerCase();
+      if (tracksLowercaseMap[Track] == null) {
         return await interaction.reply("Invalid Track Name.");
-      }
+      } else Track = tracksLowercaseMap[Track];
       let ps = new sql.PreparedStatement();
       ps.input("Discord_ID", sql.VarChar(25));
       await ps.prepare(playerIDQuery);
@@ -336,10 +427,10 @@ const casualRace = {
   },
   async execute(interaction) {
     try {
-      const Track = interaction.options.getString("track");
-      if (tracks.indexOf(Track) == -1) {
+      let Track = interaction.options.getString("track").toLowerCase();
+      if (tracksLowercaseMap[Track] == null) {
         return await interaction.reply("Invalid Track Name.");
-      }
+      } else Track = tracksLowercaseMap[Track];
       let ps = new sql.PreparedStatement();
       ps.input("Discord_ID", sql.VarChar(25));
       await ps.prepare(playerIDQuery);
@@ -415,10 +506,10 @@ const mogiRace = {
   },
   async execute(interaction) {
     try {
-      const Track = interaction.options.getString("track");
-      if (tracks.indexOf(Track) == -1) {
+      let Track = interaction.options.getString("track").toLowerCase();
+      if (tracksLowercaseMap[Track] == null) {
         return await interaction.reply("Invalid Track Name.");
-      }
+      } else Track = tracksLowercaseMap[Track];
       let ps = new sql.PreparedStatement();
       ps.input("Discord_ID", sql.VarChar(25));
       await ps.prepare(playerIDQuery);
@@ -494,10 +585,10 @@ const tournamentRace = {
   },
   async execute(interaction) {
     try {
-      const Track = interaction.options.getString("track");
-      if (tracks.indexOf(Track) == -1) {
+      let Track = interaction.options.getString("track").toLowerCase();
+      if (tracksLowercaseMap[Track] == null) {
         return await interaction.reply("Invalid Track Name.");
-      }
+      } else Track = tracksLowercaseMap[Track];
       let ps = new sql.PreparedStatement();
       ps.input("Discord_ID", sql.VarChar(25));
       await ps.prepare(playerIDQuery);
@@ -573,10 +664,10 @@ const warRace = {
   },
   async execute(interaction) {
     try {
-      const Track = interaction.options.getString("track");
-      if (tracks.indexOf(Track) == -1) {
+      let Track = interaction.options.getString("track").toLowerCase();
+      if (tracksLowercaseMap[Track] == null) {
         return await interaction.reply("Invalid Track Name.");
-      }
+      } else Track = tracksLowercaseMap[Track];
       let ps = new sql.PreparedStatement();
       ps.input("Discord_ID", sql.VarChar(25));
       await ps.prepare(playerIDQuery);
