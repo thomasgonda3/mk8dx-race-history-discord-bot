@@ -1,0 +1,18 @@
+{
+  "name": "mk8dx-discord-bot",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Deliver data to mk8dx-race-history site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Thomas Gonda",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "mssql": "^9.1.3"
+  }
+}
