@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import sql from "mssql";
+import { generateApiKey } from "generate-api-key";
 import "dotenv/config";
 
 const dbName =
@@ -76,6 +77,40 @@ const newUser = {
     } catch (e) {
       if (e.message.includes("Violation of UNIQUE KEY constraint"))
         await interaction.reply("ERROR: User already exists");
+      else {
+        console.log(e);
+      }
+    }
+  },
+};
+
+const insertAPIKeyQuery = `UPDATE [${dbName}].[dbo].[Players] 
+	  SET [API_Key] = @API_KEY
+    WHERE [Discord_ID] = @Discord_ID;`;
+
+const generateAPIKey = {
+  data: new SlashCommandBuilder()
+    .setName("generate_apikey")
+    .setDescription("generates an apikey for use on race tracker website"),
+  async execute(interaction) {
+    try {
+      const ps = new sql.PreparedStatement();
+      ps.input("API_Key", sql.NVarChar(50));
+      ps.input("Discord_ID", sql.VarChar(25));
+      await ps.prepare(insertAPIKeyQuery);
+      const API_Key = generateApiKey({ method: "uuidv4", dashes: false });
+      await ps.execute({
+        API_Key,
+        Discord_ID: interaction.user.id,
+      });
+      await ps.unprepare();
+      await interaction.reply({
+        content: `${API_Key}`,
+        ephemeral: true,
+      });
+    } catch (e) {
+      if (e.message.includes("Violation of UNIQUE KEY constraint"))
+        await interaction.reply("ERROR: Try again.");
       else {
         console.log(e);
       }
@@ -751,6 +786,7 @@ const deleteRace = {
 
 const commands = [
   newUser,
+  generateAPIKey,
   newRace,
   casualRace,
   mogiRace,
