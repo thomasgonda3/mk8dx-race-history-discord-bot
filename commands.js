@@ -49,6 +49,7 @@ const newUser = {
       option
         .setName("name")
         .setDescription("Display Name for race-tracker website")
+        .setRequired(true)
         .setMaxLength(50)
     )
     .addStringOption((option) =>
