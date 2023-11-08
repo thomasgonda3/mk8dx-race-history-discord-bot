@@ -226,6 +226,14 @@ const tracksLowercaseMap = {
   bsw: "bSW",
   bkc: "bKC",
   bvv: "bVV",
+  bra: "bRA",
+  bdkm: "bDKM",
+  bdct: "bDCt",
+  bppc: "bPPC",
+  bmd: "bMD",
+  briw: "bRIW",
+  bbc3: "bBC3",
+  brrw: "bRRw",
 };
 
 const tracksMap = {
@@ -317,6 +325,14 @@ const tracksMap = {
   bSW: "GBA Sunset Wilds",
   bKC: "Wii Koopa Cape",
   bVV: "Tour Vancouver Velocity",
+  bRA: "Tour Rome Avanti",
+  bDKM: "GCN DK Mountain",
+  bDCt: "Wii Daisy Circuit",
+  bPPC: "Piranha Plant Cove",
+  bMD: "Tour Madrid Drive",
+  bRIW: "3DS Rosalina's Ice World",
+  bBC3: "SNES Bowser Castle 3",
+  bRRw: "Wii Rainbow Road",
 };
 
 const tracks = Object.keys(tracksMap);
